@@ -171,7 +171,7 @@ def readCode(regexp, source, confirm, relative, alldomains, result):
                             t_endpoints.append(endpoint)
                             t_local_endpoints.append(endpoint)
                             if source:
-                                str = str + ("sourse %s\n" % endpoint)
+                                str = str + ("sourse: %s\n" % endpoint)
                             else:
                                 sys.stdout.write("endpoint: %s\n" % endpoint)
 
@@ -278,12 +278,12 @@ for so in t_sort_order:
     page = 1
 
     if args.verbose:
-        print('\n----- %s %s\n' % (so['sort'], so['order']))
+        print('\n-----: %s %s\n' % (so['sort'], so['order']))
 
     while True:
 
         if args.verbose:
-            print("page %d" % page)
+            print("page: %d" % page)
 
         time.sleep(random.random())
         token = random.choice(t_tokens)
@@ -292,7 +292,7 @@ for so in t_sort_order:
 
         if not t_json or 'documentation_url' in t_json:
             if args.verbose:
-                print(f'tjson {t_json}')
+                print(f'tjson: {t_json}')
             t_tokens.remove(token)
             if len(t_tokens) == 0:
                 exit()
