@@ -16,7 +16,6 @@ from multiprocessing.dummy import Pool
 from urllib.parse import urlparse
 
 import requests
-from colored import fg, attr
 
 TOKENS_FILE = os.path.dirname(os.path.realpath(__file__)) + '/.github_tokens'
 MIN_LENGTH = 5
@@ -105,7 +104,7 @@ def githubApiSearchCode(token, search, page, sort, order):
         # print(r.text)
         return json
     except Exception as e:
-        print("%s[-] error occurred: %s%s" % (fg('red'), e, attr(0)))
+        print("[-] error occurred: %s" % e)
         return False
 
 
@@ -131,7 +130,7 @@ def readCode(regexp, source, confirm, relative, alldomains, result):
 
     if code:
         if source:
-            str = "\n%s>>> %s%s\n\n" % (fg('yellow'), result['html_url'], attr(0))
+            str = "\n>>> %s\n" % result['html_url']
         matches = re.findall(regexp, code, re.IGNORECASE)
         if matches:
             for r in t_regexp:
@@ -166,7 +165,7 @@ def readCode(regexp, source, confirm, relative, alldomains, result):
                                     if not sss:
                                         continue
                                 except Exception as e:
-                                    sys.stdout.write("%s[-] error occurred: %s%s\n" % (fg('red'), e, attr(0)))
+                                    sys.stdout.write("[-] error occurred: %s\n" % e)
 
                             t_endpoints.append(endpoint)
                             t_local_endpoints.append(endpoint)
@@ -183,7 +182,7 @@ def doGetCode(url):
     try:
         r = requests.get(url, timeout=5)
     except Exception as e:
-        sys.stdout.write("%s[-] error occurred: %s%s\n" % (fg('red'), e, attr(0)))
+        sys.stdout.write("[-] error occurred: %s\n" % e)
         return False
 
     return r.text
